@@ -13,6 +13,7 @@ builder.Services.AddDbContext<BookingDbContext>(options =>
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddScoped<BookingService.Service.BookingServiceHandler>();
 
 builder.Services.AddCors(options =>
 {

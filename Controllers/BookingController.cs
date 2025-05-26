@@ -1,5 +1,6 @@
 ﻿using BookingService.Data;
 using BookingService.Models;
+using BookingService.Service;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookingService.Controllers;
@@ -8,18 +9,18 @@ namespace BookingService.Controllers;
 [ApiController]
 public class BookingController : ControllerBase
 {
-    private readonly BookingDbContext _context;
+    private readonly BookingServiceHandler _bookingServiceHandler;
 
-    public BookingController(BookingDbContext context)
+    public BookingController(BookingServiceHandler bookingServiceHandler)
     {
-        _context = context;
+        _bookingServiceHandler = bookingServiceHandler;
     }
 
     //Hämta alla boknignar
     [HttpGet]
     public IActionResult GetBookings()
     {
-        var bookings = _context.Bookings.ToList();
+        var bookings = _bookingServiceHandler.GetBookings();
         return Ok(bookings);
     }
 
@@ -31,13 +32,10 @@ public class BookingController : ControllerBase
             return BadRequest(ModelState);
         }
 
-        booking.Id = Guid.NewGuid();
-        booking.BookingDate = DateTime.Now; 
-       
+        var created = _bookingServiceHandler.Create(booking);
+        return Ok(created);
 
-        _context.Bookings.Add(booking);
-        _context.SaveChanges();
 
-        return Ok(booking);
+        
     }
 }
