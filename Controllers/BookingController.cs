@@ -16,23 +16,23 @@ public class BookingController : ControllerBase
         _bookingServiceHandler = bookingServiceHandler;
     }
 
-    //Hämta alla boknignar
+   
     [HttpGet]
-    public IActionResult GetBookings()
+    public async Task<IActionResult> GetBookings()
     {
-        var bookings = _bookingServiceHandler.GetBookings();
+        var bookings = await _bookingServiceHandler.GetBookingsAsync();
         return Ok(bookings);
     }
 
     [HttpPost]
-    public IActionResult CreateBooking([FromBody] Booking booking)
+    public async Task<IActionResult> CreateBooking([FromBody] Booking booking)
     {
         if (!ModelState.IsValid)
         {
             return BadRequest(ModelState);
         }
 
-        var created = _bookingServiceHandler.Create(booking);
+        var created = await _bookingServiceHandler.CreateAsync(booking);
         return Ok(created);
 
 

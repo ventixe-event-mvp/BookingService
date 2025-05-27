@@ -1,5 +1,6 @@
 ﻿using BookingService.Data;
 using BookingService.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace BookingService.Service;
 
@@ -12,20 +13,20 @@ public class BookingServiceHandler
     }
 
     //Hämta alla 
-    public IEnumerable<Booking> GetBookings()
+    public async Task<IEnumerable<Booking>> GetBookingsAsync()
     {
-        return _context.Bookings.ToList();
+        return await _context.Bookings.ToListAsync();
     }
 
     //Skapa en ny bokning
-    public Booking Create(Booking booking)
+    public async Task<Booking> CreateAsync(Booking booking)
     {
       
         booking.Id = Guid.NewGuid();
         booking.BookingDate = DateTime.Now;
 
         _context.Bookings.Add(booking);
-        _context.SaveChanges();
+         await _context.SaveChangesAsync();
         return booking;
     }
 
