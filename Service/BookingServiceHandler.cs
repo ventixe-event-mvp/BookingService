@@ -29,6 +29,11 @@ public class BookingServiceHandler
          await _context.SaveChangesAsync();
         return booking;
     }
-
-
+    //Hämta  bokning för användare  (id)
+    public async Task<IEnumerable<Booking>> GetBookingsByUserIdAsync(Guid userId)
+    {
+        return await _context.Bookings
+            .Where(b => b.UserId == userId)
+            .ToListAsync();
+    }
 }

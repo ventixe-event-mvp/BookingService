@@ -24,6 +24,13 @@ public class BookingController : ControllerBase
         return Ok(bookings);
     }
 
+    [HttpGet("user/{userId}")]
+    public async Task<IActionResult> GetBookingsByUser(Guid userId)
+    {
+       var bookings = await _bookingServiceHandler.GetBookingsByUserIdAsync(userId);
+        return Ok(bookings);
+    }
+
     [HttpPost]
     public async Task<IActionResult> CreateBooking([FromBody] Booking booking)
     {
