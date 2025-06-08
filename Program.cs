@@ -1,6 +1,8 @@
 using BookingService.Data;
 using Microsoft.EntityFrameworkCore;
 
+//koden skriven i samarbete med chatGPT
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.

@@ -4,6 +4,7 @@ using BookingService.Service;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookingService.Controllers;
+//koden skriven i samarbete med chatGPT
 
 [Route("api/[controller]")]
 [ApiController]

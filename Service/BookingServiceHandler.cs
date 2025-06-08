@@ -1,7 +1,7 @@
 ﻿using BookingService.Data;
 using BookingService.Models;
 using Microsoft.EntityFrameworkCore;
-
+// koden skriven i samarbete med chatGPT
 namespace BookingService.Service;
 
 public class BookingServiceHandler
